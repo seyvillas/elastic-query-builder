@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Aggregations;
+namespace SeyVillas\ElasticQueryBuilder\Aggregations;
 
-use Spatie\ElasticsearchQueryBuilder\Aggregations\Concerns\WithMissing;
+use SeyVillas\ElasticQueryBuilder\Aggregations\Concerns\WithMissing;
 
 class MaxAggregation extends Aggregation
 {

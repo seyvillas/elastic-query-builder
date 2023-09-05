@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Queries;
+namespace SeyVillas\ElasticQueryBuilder\Queries;
 
-use Spatie\ElasticsearchQueryBuilder\Exceptions\BoolQueryTypeDoesNotExist;
+use SeyVillas\ElasticQueryBuilder\Exceptions\BoolQueryTypeDoesNotExist;
 
 class BoolQuery implements Query
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Aggregations\Concerns;
+namespace SeyVillas\ElasticQueryBuilder\Aggregations\Concerns;
 
 trait WithMissing
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Aggregations;
+namespace SeyVillas\ElasticQueryBuilder\Aggregations;
 
-use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
+use SeyVillas\ElasticQueryBuilder\Sorts\Sort;
 
 class TopHitsAggregation extends Aggregation
 {

@@ -1,19 +1,19 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder;
+namespace SeyVillas\ElasticQueryBuilder;
 
-use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
+use SeyVillas\ElasticQueryBuilder\Sorts\ISort;
 
 class SortCollection
 {
     protected array $sorts;
 
-    public function __construct(Sort ...$sorts)
+    public function __construct(ISort ...$sorts)
     {
         $this->sorts = $sorts;
     }
 
-    public function add(Sort $sort): self
+    public function add(ISort $sort): self
     {
         $this->sorts[] = $sort;
 

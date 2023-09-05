@@ -4,7 +4,7 @@ namespace SeyVillas\ElasticQueryBuilder\Aggregations;
 
 use SeyVillas\ElasticQueryBuilder\Aggregations\Concerns\WithMissing;
 
-class SumAggregation extends Aggregation
+class AvgAggregation extends Aggregation
 {
     use WithMissing;
 
@@ -32,7 +32,7 @@ class SumAggregation extends Aggregation
         }
 
         return [
-            'sum' => $parameters,
+            'avg' => $parameters,
         ];
     }
 }

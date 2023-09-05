@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Queries;
+namespace SeyVillas\ElasticQueryBuilder\Queries;
 
 class PrefixQuery implements Query
 {

@@ -1,19 +1,21 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Queries;
+namespace SeyVillas\ElasticQueryBuilder\Queries;
+
+use Spatie\ElasticsearchQueryBuilder\Queries\Query;
 
 class TermQuery implements Query
 {
     protected string $field;
 
-    protected string $value;
+    protected string|int|bool $value;
 
-    public static function create(string $field, string $value): static
+    public static function create(string $field, string|int|bool $value): static
     {
         return new self($field, $value);
     }
 
-    public function __construct(string $field, string $value)
+    public function __construct(string $field, string|int|bool $value)
     {
         $this->field = $field;
         $this->value = $value;

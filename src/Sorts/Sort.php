@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Sorts;
+namespace SeyVillas\ElasticQueryBuilder\Sorts;
 
-class Sort
+class Sort implements ISort
 {
     public const ASC = 'asc';
     public const DESC = 'desc';

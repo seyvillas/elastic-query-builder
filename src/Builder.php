@@ -1,14 +1,14 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder;
+namespace SeyVillas\ElasticQueryBuilder;
 
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Http\Promise\Promise;
-use Spatie\ElasticsearchQueryBuilder\Aggregations\Aggregation;
-use Spatie\ElasticsearchQueryBuilder\Queries\BoolQuery;
-use Spatie\ElasticsearchQueryBuilder\Queries\Query;
-use Spatie\ElasticsearchQueryBuilder\Sorts\Sort;
+use SeyVillas\ElasticQueryBuilder\Aggregations\Aggregation;
+use SeyVillas\ElasticQueryBuilder\Queries\BoolQuery;
+use SeyVillas\ElasticQueryBuilder\Queries\Query;
+use SeyVillas\ElasticQueryBuilder\Sorts\ISort;
 
 class Builder
 {
@@ -56,7 +56,7 @@ class Builder
         return $this;
     }
 
-    public function addSort(Sort $sort): static
+    public function addSort(ISort $sort): static
     {
         if (! $this->sorts) {
             $this->sorts = new SortCollection();

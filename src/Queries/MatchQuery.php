@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\ElasticsearchQueryBuilder\Queries;
+namespace SeyVillas\ElasticQueryBuilder\Queries;
 
 class MatchQuery implements Query
 {
     public static function create(
         string $field,
-        string | int $query,
+        string | int | bool $query,
         null | string | int $fuzziness = null
     ): self {
         return new self($field, $query, $fuzziness);
@@ -14,7 +14,7 @@ class MatchQuery implements Query
 
     public function __construct(
         protected string $field,
-        protected string | int $query,
+        protected string | int | bool $query,
         protected null | string | int $fuzziness = null
     ) {
     }
