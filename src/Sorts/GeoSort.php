@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace SeyVillas\ElasticQueryBuilder\Sorts;
 
+use SeyVillas\ElasticQueryBuilder\Geo\Point;
+
 class GeoSort implements ISort
 {
     public const ASC = 'asc';
