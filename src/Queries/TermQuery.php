@@ -2,8 +2,6 @@
 
 namespace SeyVillas\ElasticQueryBuilder\Queries;
 
-use Spatie\ElasticsearchQueryBuilder\Queries\Query;
-
 class TermQuery implements Query
 {
     protected string $field;
