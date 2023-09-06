@@ -5,20 +5,14 @@ declare(strict_types=1);
 namespace SeyVillas\ElasticQueryBuilder\Sorts;
 
 use SeyVillas\ElasticQueryBuilder\Geo\Point;
+use SeyVillas\ElasticQueryBuilder\Geo\Units;
 
 class GeoSort implements ISort
 {
+    use Units;
+
     public const ASC = 'asc';
     public const DESC = 'desc';
-
-    // Metric units
-    public const METERS = 'm';
-    public const KILOMETERS = 'km';
-
-    // UK/US Units
-    public const FEET = 'ft';
-    public const YARDS = 'yd';
-    public const MILES = 'mi';
 
     // Distance Types
     public const ARC = 'arc';
