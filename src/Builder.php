@@ -10,6 +10,9 @@ use SeyVillas\ElasticQueryBuilder\Queries\BoolQuery;
 use SeyVillas\ElasticQueryBuilder\Queries\Query;
 use SeyVillas\ElasticQueryBuilder\Sorts\ISort;
 
+use function array_merge;
+
+
 class Builder
 {
     protected ?BoolQuery $query = null;
@@ -29,6 +32,8 @@ class Builder
     protected ?array $fields = null;
 
     protected bool $withAggregations = true;
+
+    protected ?array $scripts = null;
 
     public function __construct(protected Client $client)
     {
@@ -132,6 +137,13 @@ class Builder
         return $this;
     }
 
+    public function addScript(string $name , array $script): static
+    {
+        $this->scripts[$name]['script'] = $script;
+
+        return $this;
+    }
+
     public function getPayload(): array
     {
         $payload = [];
@@ -154,6 +166,10 @@ class Builder
 
         if ($this->searchAfter) {
             $payload['search_after'] = $this->searchAfter;
+        }
+
+        if ($this->scripts) {
+            $payload['script_fields'] = $this->scripts;
         }
 
         return $payload;

@@ -118,6 +118,17 @@ The following query types are available:
 \SeyVillas\ElasticQueryBuilder\Queries\WildcardQuery::create('user.id', '*doe');
 ```
 
+#### `GeoQuery`
+```php
+use SeyVillas\ElasticQueryBuilder\Geo\Point;
+
+$builder
+    ->addQuery(
+        $distanceQuery = GeoDistanceQuery::create('location', Point::create($point->latitude, $point->longitude)),
+    'filter'
+);
+```
+
 #### `BoolQuery`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
@@ -256,8 +267,9 @@ The following query types are available:
 
 ## Adding sorts
 
-The `Builder` (and some aggregations) has a `addSort()` method that takes a `Sort` instance to sort the results. You can read more about how sorting works in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html).
+The `Builder` (and some aggregations) has a `addSort()` method that takes a `ISort` instance to sort the results. You can read more about how sorting works in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html).
 
+### `Standard Sort`
 ```php
 use SeyVillas\ElasticQueryBuilder\Sorts\Sort;
 
@@ -268,6 +280,28 @@ $builder
             ->unmappedType('long')
             ->missing(0)
     );
+```
+
+### `GeoSort`
+
+```php
+use SeyVillas\ElasticQueryBuilder\Geo\Point;
+use SeyVillas\ElasticQueryBuilder\Sorts\GeoSort;
+
+$builder
+    ->addSort(
+        GeoSort::create('location', Point::create($point->latitude, $point->longitude))
+    );
+```
+
+### `Random`
+There's also possibility to use **Random** sort:
+
+```php
+use SeyVillas\ElasticQueryBuilder\Sorts\Random;
+
+$builder
+    ->addSort(Random::create());
 ```
 
 ## Retrieve specific fields
@@ -294,6 +328,39 @@ $pageResults = (new Builder(Elastic\Elasticsearch\ClientBuilder::create()))
     ->search();
 ```
 
+## Scripts
+
+It's also possible to add scripts as an array to the query. For example, here's a simple script that retrieves the first item from the images array and returns it in the $response['fields'] array: 
+```php
+$builder
+    ->addScript(
+        'images',
+        [
+            'source' => "params['_source']['images'][0]",
+            'lang' => 'painless'
+        ]
+    );
+```
+
+This script checks if the images array exists and contains at least one item. If both conditions are met, it returns the first item from the images array; otherwise, it returns null.
+```php
+$builder
+->addScript(
+    'images',
+    [
+        'source' => "
+            if (params['_source']['images'] != null && !params['_source']['images'].isEmpty()) {
+                return params['_source']['images'][0];
+            } else {
+                return null;
+            }
+        ",
+        'lang' => 'painless'
+    ]
+);
+
+```
+
 ## Testing
 
 ```bash
@@ -305,7 +372,7 @@ composer test
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Credits
-- [Miroslav Koula](https://github.com/elcheco)
+- [Miroslav Koula](https://github.com/elcheco)~~~~
 - [Alex Vanderbist](https://github.com/alexvanderbist)
 - [Ruben Van Assche](https://github.com/rubenvanassche)
 - [All Contributors](../../contributors)
