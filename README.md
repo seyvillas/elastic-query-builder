@@ -207,6 +207,14 @@ The following query types are available:
 \SeyVillas\ElasticQueryBuilder\Aggregations\MinAggregation::create('min_price', 'price');
 ```
 
+#### `AvgAggregation`
+
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html)
+
+```php
+\SeyVillas\ElasticQueryBuilder\Aggregations\AvgAggregation::create('avg_price', 'price');
+```
+
 #### `SumAggregation`
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html)
@@ -372,7 +380,7 @@ composer test
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Credits
-- [Miroslav Koula](https://github.com/elcheco)~~~~
+- [Miroslav Koula](https://github.com/elcheco)
 - [Alex Vanderbist](https://github.com/alexvanderbist)
 - [Ruben Van Assche](https://github.com/rubenvanassche)
 - [All Contributors](../../contributors)
