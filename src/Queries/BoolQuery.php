@@ -6,6 +6,11 @@ use SeyVillas\ElasticQueryBuilder\Exceptions\BoolQueryTypeDoesNotExist;
 
 class BoolQuery implements Query
 {
+    public const MUST = 'must';
+    public const FILTER = 'filter';
+    public const SHOULD = 'should';
+    public const MUST_NOT = 'must_not';
+
     protected array $must = [];
     protected array $filter = [];
     protected array $should = [];
@@ -16,9 +21,9 @@ class BoolQuery implements Query
         return new self();
     }
 
-    public function add(Query $query, string $type = 'must'): static
+    public function add(Query $query, string $type = self::MUST): static
     {
-        if (! in_array($type, ['must', 'filter', 'should', 'must_not'])) {
+        if (! in_array($type, [static::MUST, static::FILTER, static::SHOULD, static::MUST_NOT])) {
             throw new BoolQueryTypeDoesNotExist($type);
         }
 
@@ -30,10 +35,10 @@ class BoolQuery implements Query
     public function toArray(): array
     {
         $bool = [
-            'must' => array_map(fn (Query $query) => $query->toArray(), $this->must),
-            'filter' => array_map(fn (Query $query) => $query->toArray(), $this->filter),
-            'should' => array_map(fn (Query $query) => $query->toArray(), $this->should),
-            'must_not' => array_map(fn (Query $query) => $query->toArray(), $this->must_not),
+            static::MUST => array_map(fn (Query $query) => $query->toArray(), $this->must),
+            static::FILTER => array_map(fn (Query $query) => $query->toArray(), $this->filter),
+            static::SHOULD => array_map(fn (Query $query) => $query->toArray(), $this->should),
+            static::MUST_NOT => array_map(fn (Query $query) => $query->toArray(), $this->must_not),
         ];
 
         return [
