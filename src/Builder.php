@@ -37,6 +37,10 @@ class Builder
 
     protected ?array $scripts = null;
 
+    protected ?array $excludes = [];
+
+    protected ?array $includes = [];
+
     public function __construct(protected Client $client)
     {
     }
@@ -70,6 +74,20 @@ class Builder
         }
 
         $this->sorts->add($sort);
+
+        return $this;
+    }
+
+    public function addExclude(string $field): static
+    {
+        $this->excludes[] = $field;
+
+        return $this;
+    }
+
+    public function addInclude(string $field): static
+    {
+        $this->includes[] = $field;
 
         return $this;
     }
@@ -175,6 +193,22 @@ class Builder
 
         if ($this->fields) {
             $payload['_source'] = $this->fields;
+        }
+
+        if ($this->excludes !== []) {
+            if (!isset($payload['_source'])) {
+                $payload['_source'] = [];
+            }
+
+            $payload['_source']['excludes'] = $this->excludes;
+        }
+
+        if ($this->includes !== []) {
+            if (!isset($payload['_source'])) {
+                $payload['_source'] = [];
+            }
+
+            $payload['_source']['includes'] = $this->includes;
         }
 
         if ($this->searchAfter) {
