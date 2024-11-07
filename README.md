@@ -320,6 +320,17 @@ The `fields()` method can be used to request specific fields from the resulting 
 $builder->fields('user.id', 'http.*.status');
 ```
 
+## Specify excludes/includes in the `_source`
+The `addExclude($name)` or `addInclude($name)` methods can be used for specifying excludes or includes on the `_source`. More in [the ElasticSearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html#include-exclude).
+
+```php
+$builder->addExclude('document key');
+```
+or you can use also `*`:
+```php
+$builder->addExclude('translations.*');
+```
+
 ## Pagination
 
 Finally the `Builder` also features a `size()` and `from()` method for the corresponding ElasticSearch search parameters. These can be used to build a paginated search. Take a look the following example to get a rough idea:
